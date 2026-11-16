@@ -167,7 +167,7 @@ def get_smart_chat_llm(
         )
         return llm, "gemini", model_id
 
-    # 🥇 Tier 1B: OpenRouter API (Рекомендовано в оновленнях ДЗ 2, 3, 4)
+    # 🥇 Tier 1B: OpenRouter API (Найнадійніший універсальний провайдер)
     or_key = get_secret("OPENROUTER_API_KEY", required=False)
     if preferred_tier in {"auto", "openrouter"} and or_key:
         model_id = validate_model_actualization(
@@ -182,7 +182,7 @@ def get_smart_chat_llm(
             kwargs["temperature"] = temperature
         return ChatOpenAI(**kwargs), "openrouter", model_id
 
-    # 🥇 Tier 1C: Direct OpenAI API (`gpt-5.6-luna` для генерації, `gpt-5.6-terra` для судді в ДЗ 5)
+    # 🥇 Tier 1C: Direct OpenAI API
     oa_key = get_secret("OPENAI_API_KEY", required=False)
     if preferred_tier in {"auto", "openai"} and oa_key:
         default_oa = (
@@ -192,7 +192,6 @@ def get_smart_chat_llm(
         )
         model_id = validate_model_actualization(default_oa)
         kwargs = {"model": model_id, "api_key": oa_key}
-        # Моделі сімейства gpt-5 є міркувальними і не приймають довільну температуру
         if not model_id.startswith(REASONING_NO_TEMP_PREFIXES):
             kwargs["temperature"] = temperature
         return ChatOpenAI(**kwargs), "openai", model_id

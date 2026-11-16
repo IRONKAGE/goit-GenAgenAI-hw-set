@@ -89,7 +89,7 @@ def title_head_hw(HW1BenchmarkRunner, UI_LABELS, mo):
 
 
 @app.cell(hide_code=True)
-def _(
+def main(
     TASK3_BASE_VS_INSTRUCT_SUITE,
     analyze_bpe_tokenization_fertility,
     compute_sampling_distribution,
