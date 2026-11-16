@@ -90,7 +90,7 @@ def title_head_hw(
     return chunks, css_no_scroll, orchestrator, qa_records
 
 
-@app.cell
+@app.cell(hide_code=True)
 def main(
     TEST_QUESTIONS_HW4,
     chunks,
